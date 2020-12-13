@@ -1,5 +1,6 @@
+#!/usr/bin/env ruby
 
-input_numbers = IO.readlines(ARGV.argv[1])
-input_numbers.sort
+p "Arguments: " + ARGV.to_s
+input_lines = IO.readlines ARGV[0]
+input_numbers = input_lines.map(&:to_i).sort
 p input_numbers
-
