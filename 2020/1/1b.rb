@@ -2,7 +2,7 @@
 
 target_sum = 2020
 
-input_lines = IO.readlines("../1/1.input")
+input_lines = IO.readlines("1.input")
 input_numbers = input_lines.map(&:to_i).sort
 
 input_numbers.each_with_index { | first_number, first_index |
