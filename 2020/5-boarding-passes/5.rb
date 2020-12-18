@@ -17,4 +17,9 @@ IO.readlines("5.input").each { | line |
     end
 }
 
-p "Max seat ID: " + seat_ids.max.to_s
+(seat_ids.min..seat_ids.max).to_a.each { | id |
+    if !seat_ids.sort.include? id
+        p "Missing seat ID: " + id.to_s
+        break
+    end
+}
