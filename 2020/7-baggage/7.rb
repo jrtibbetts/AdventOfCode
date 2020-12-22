@@ -14,17 +14,26 @@ def bags_contained_by_color(color, bags)
 end
 
 def number_of_bags_contained_by(bag_color)
-    p "Finding number of bags contained by " + bag_color + ": "
+    # p "Finding number of bags contained by " + bag_color + ": "
     sub_bags = @bags[bag_color]
 
     if sub_bags == nil
-        p "none"
+        # p "none"
         return 0
     else
-        p sub_bags.count.to_s
+        # p sub_bags.count.to_s
         # p "Sub bags: " + sub_bags.to_s # .to_a.join(", ")
         return sub_bags.count + sub_bags.inject(0) { | sum, sub_bag | sum + number_of_bags_contained_by(sub_bag)}
     end
+end
+
+def print_bag(color, depth)
+    padding = Array.new(depth * 2, " ")
+    p padding.join + color
+
+    @bags[color].each { | sub_bag |
+        print_bag(sub_bag, depth + 1)
+    }
 end
 
 @bags_by_color = { }
@@ -58,3 +67,5 @@ gold_container_count = 0
 
 p gold_container_count.to_s + " bags can contain shiny gold."
 p "A shiny gold bag contains " + number_of_bags_contained_by("shiny gold").to_s
+
+print_bag("shiny gold", 0)
