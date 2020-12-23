@@ -21,7 +21,8 @@ def number_of_bags_contained_by(color)
     else
         return sub_bags.inject(0) { | sum, sub_bag_color_and_count |
             /(\d+) (.*)/ =~ sub_bag_color_and_count
-            sum + ($1.to_i * number_of_bags_contained_by($2))
+            sum += $1.to_i # the sub-bag itself
+            sum + ($1.to_i * number_of_bags_contained_by($2)) # the bags contained by the sub-bag
         }
     end
 end
