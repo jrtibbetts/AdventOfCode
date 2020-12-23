@@ -1,12 +1,10 @@
 #!/usr/bin/env ruby
 
-require 'Set'
-
 def bags_contained_by_color(color, bags)
     contained_bags = bags[color]
 
     if contained_bags == nil
-        contained_bags = [color] # Set[color]
+        contained_bags = [color]
         bags[color] = contained_bags
      end
 
