@@ -13,19 +13,16 @@ def bags_contained_by_color(color, bags)
     return contained_bags
 end
 
-def number_of_bags_contained_by(color_and_count)
-    /(\d+) (.*)/ =~ color_and_count
-    sub_bags = @bags[$2]
+def number_of_bags_contained_by(color)
+    sub_bags = @bags[color]
 
     if sub_bags.empty?
         return 0
     else
-        sub_bag_count = 0
-        sub_bags.each { | sub_bag |
-            
+        return sub_bags.inject(0) { | sum, sub_bag_color_and_count |
+            /(\d+) (.*)/ =~ sub_bag_color_and_count
+            sum + ($1.to_i * number_of_bags_contained_by($2))
         }
-
-        return sub_bags.count + ($1.to_i * sub_bags.inject(0) { | sum, sub_bag | sum + number_of_bags_contained_by(sub_bag)} )
     end
 end
 
@@ -33,7 +30,7 @@ def print_bag(color_and_count, depth)
     /(\d+) (.*)/ =~ color_and_count
 
     padding = Array.new(depth * 2, " ")
-    p padding.join + $1 + " " + $2 + " (x" + number_of_bags_contained_by(color_and_count).to_s + ")"
+    p padding.join + $1 + " " + $2 + " (x" + number_of_bags_contained_by($2).to_s + ")"
 
     @bags[$2].each { | sub_bag |
         print_bag(sub_bag, depth + 1)
@@ -71,6 +68,6 @@ gold_container_count = 0
 }
 
 p gold_container_count.to_s + " bags can contain shiny gold."
-p "A shiny gold bag contains " + number_of_bags_contained_by("1 shiny gold").to_s
+p "A shiny gold bag contains " + number_of_bags_contained_by("shiny gold").to_s
 
 print_bag("1 shiny gold", 0)
