@@ -30,6 +30,20 @@ def can_execute_task_1
 end
 
 def can_execute_task_2
+    if @executed_lines.include? @instruction_index
+        instruction = @program[@instruction_index]
+        p "Duplicate instruction: " + instruction
+
+        case instruction
+        when /jmp/
+            @program[@instruction_index] = instruction.gsub(/jmp/, "nop")
+        when /nop/
+            @program[@instruction_index] = instruction.gsub(/nop/, "jmp")
+        end
+
+        p "Replaced with: " + @program[@instruction_index]
+    end
+
     true
 end
 
@@ -40,7 +54,7 @@ def run_program(can_execute)
             break
         end
 
-        p @instruction_index.to_s + ": " + @program[@instruction_index]
+        # p @instruction_index.to_s + ": " + @program[@instruction_index]
         @executed_lines << @instruction_index
 
         case @program[@instruction_index]
@@ -60,5 +74,4 @@ end
 run_program(:can_execute_task_1)
 
 # Task 2
-# run_program(:can_execute_task_2)
-
+run_program(:can_execute_task_2)
