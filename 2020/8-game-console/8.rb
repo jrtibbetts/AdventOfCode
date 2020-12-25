@@ -9,8 +9,32 @@ require 'Set'
 @program = IO.readlines("8.input")
 @program.freeze
 
-def run_program
-    while !@executed_lines.include? @instruction_index
+def accumulate(amount)
+    # p "Adding " + $1
+    @accumulator += amount
+    @instruction_index += 1
+end
+
+def jump(to_index)
+    @instruction_index += to_index
+    # p "Jumping to " + @instruction_index.to_s
+end
+
+def do_nothing
+    # p "Doing nothing"
+    @instruction_index += 1
+end
+
+def can_execute_task_1
+    !@executed_lines.include? @instruction_index
+end
+
+def can_execute_task_2
+    true
+end
+
+def run_program(can_execute)
+    while self.send(can_execute)
         if @instruction_index >= @program.count
             p "Program terminated successfully! Accumulator is " + @accumulator.to_s
             break
@@ -21,15 +45,11 @@ def run_program
 
         case @program[@instruction_index]
         when /acc ([+-]\d+)/
-            # p "Adding " + $1
-            @accumulator += $1.to_i
-            @instruction_index += 1
+            accumulate($1.to_i)
         when /jmp ([+-]\d+)/
-            @instruction_index += $1.to_i
-            # p "Jumping to " + @instruction_index.to_s
+            jump($1.to_i)
         when /nop/
-            # p "Doing nothing"
-            @instruction_index += 1
+            do_nothing
         end
     end
 
@@ -37,13 +57,8 @@ def run_program
 end
 
 # Task 1
-run_program
+run_program(:can_execute_task_1)
 
 # Task 2
-jmp_nop_indices = @program.each_with_index.filter_map { | line, index |
-    if /jmp/ =~ line || /nop/ =~ line
-        return 
-    end
-}
-
+# run_program(:can_execute_task_2)
 
