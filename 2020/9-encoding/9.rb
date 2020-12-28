@@ -46,7 +46,7 @@ input.each_with_index { | number, index |
 
             if new_sum == @target_number
                 run << j_index + index
-                p run.to_s
+                # p run.to_s
                 p "The sequence that adds up to " + @target_number.to_s + " is " + run.map { | x | input[x] }.to_s
                 sorted_values = run.map { | x | input[x] }.sort
                 p "The smallest and largest number in this sequence add up to " + (sorted_values.first + sorted_values.last).to_s
