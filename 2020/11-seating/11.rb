@@ -23,7 +23,11 @@ def pad_table(table)
 end
 
 def has_occupied_neighbors(table, row_index, col_index)
-    table[(row - 1)..(row + 1)].each_with_index { | row,  }
+    if row_index > 0
+        if col_index > 0
+    elsif row_index < table.count - 1
+    else
+    end
 end
 
 while true
