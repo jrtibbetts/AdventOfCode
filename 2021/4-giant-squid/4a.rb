@@ -97,7 +97,6 @@ end
 input_lines = IO.readlines("4.input").map { | line | line.strip } # .select { | line | !line.empty?}
 
 bingo_numbers = input_lines.shift.split(",").map { | n | n.to_i }
-p bingo_numbers.count
 
 # skip the empty line
 input_lines.shift
@@ -114,21 +113,23 @@ input_lines.each { | line |
     end
 }
 
-bingo_numbers.each { | number |
-    p "Selected " + number.to_s
-    boards.each { | board |
-        board.pick number
-
-        if board.is_complete?
-            p "Completed board"
-            p board.to_s
-            p "Board score: " + board.score(number).to_s
-            exit
-        end
+def find_winning_board(bingo_numbers, boards)
+    bingo_numbers.each { | number |
+        boards.each { | board |
+            board.pick number
+    
+            if board.is_complete?
+                p "Completed board"
+                p board.to_s
+                p "Board score: " + board.score(number).to_s
+                exit
+            end
+        }
     }
-}
+end
 
-# p "Board count " + boards.count.to_s
-# boards.each { | board |
-#     p board.to_s
-# }
+# 4a
+find_winning_board(bingo_numbers, boards)
+
+# 4b
+find_winning_board(bingo_numbers, boards.reverse)
