@@ -1,5 +1,12 @@
 #!/usr/bin/env ruby
 
+# (100,200) -> (100,300) = vertical line going down
+# (100,300) -> (100,200) = vertical line going up
+# (100,100) -> (200,100) = horizontal line going right
+# (200,100) -> (100,100) = horizontal line going left
+# (100,100) -> (200,200) = diagonal line going down & right
+# (200,200) -> (100,100) = diagonal line going up & left
+
 class Line
     @start
     @end
@@ -39,11 +46,11 @@ class Line
     end
 
     def vertical_delta
-        diff = @start[0] - @end[0]
+        diff = @start[1] - @end[1]
 
-        if diff == 0
+        if diff == 0 # the line is horizontal
             return 0
-        elsif diff < 1
+        elsif diff < 1 # the line 
             return 1
         else
             return -1
@@ -57,12 +64,8 @@ class Line
         new_y = @start[1]
 
         diff.times { | index |    
-            if is_horizontal?
-                new_x += horizontal_delta
-            elsif is_vertical?
-                new_y += vertical_delta
-            end
-
+            new_x += horizontal_delta
+            new_y += vertical_delta
             new_point = [new_x, new_y]
             points.push new_point
         }
