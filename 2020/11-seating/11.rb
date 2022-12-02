@@ -23,9 +23,9 @@ def pad_table(table)
 end
 
 def has_occupied_neighbors(table, row_index, col_index)
-    if row_index > 0
-        if col_index > 0
-    elsif row_index < table.count - 1
+    if row_index == 0
+        if col_index == 0 && table[]
+    elsif row_index == (table.count - 1)
     else
     end
 end
