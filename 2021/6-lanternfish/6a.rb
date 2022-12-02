@@ -4,7 +4,7 @@ input_lines = IO.readlines("6.input").map { | line | line.strip }.select { | lin
 lanternfish_ages = input_lines.first.split(",").map { | x | x.to_i }
 p "Initial ages: " + lanternfish_ages.to_s 
 
-80.times { | index |
+256.times { | index |
     p "Day " + index.to_s + ": " + lanternfish_ages.length.to_s
     baby_fish = []
     lanternfish_ages = lanternfish_ages.map { | x |
@@ -19,7 +19,11 @@ p "Initial ages: " + lanternfish_ages.to_s
     }
 
     lanternfish_ages += baby_fish
-    p "Ages: " + lanternfish_ages.join(",")
+    # p "Ages: " + lanternfish_ages.join(",")
+
+    if index == 79
+        p "After 80 days, there are " + lanternfish_ages.count.to_s + " lanternfish"
+    end
 }
 
-p "There are now " + lanternfish_ages.count.to_s + " lanternfish"
+p "After 256 days, there are " + lanternfish_ages.count.to_s + " lanternfish"
