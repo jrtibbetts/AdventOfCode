@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-contains_count = 0
-
+completely_contains_count = 0
+overlaps_count = 0
 
 input_lines = IO.readlines("./4.txt")
 input_lines.each { | line |
@@ -13,10 +13,10 @@ input_lines.each { | line |
     p "Second section " + second_section.to_s
 
     if (first_section[0] <= second_section[0] && first_section[1] >= second_section[1])
-        contains_count += 1
+        completely_contains_count += 1
         p "The first section contains the second section"
     elsif (first_section[0] >= second_section[0] && first_section[1] <= second_section[1])
-        contains_count += 1
+        completely_contains_count += 1
         p "The second section contains the first section"
     else
         p "Neither one contains the other"
@@ -25,4 +25,4 @@ input_lines.each { | line |
     p ""    
 }
 
-p "Contains count " + contains_count.to_s
+p "Contains count " + completely_contains_count.to_s
